@@ -12,9 +12,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(
-    catalog = "todo-list-demo",    
-    name = "todo")
+@Table(catalog = "todo-list-demo", name = "todo")
 @NoArgsConstructor
 @Getter
 @Setter
@@ -32,16 +30,21 @@ public class TodoEntity {
     @Column(name = "is_del")
     private Boolean isDel = false;
 
+    @Column(name = "is_complete")
+    private Boolean isComplete = false;
+
     @Builder
-    public TodoEntity(String title, String description, Boolean isDel) {
+    public TodoEntity(String title, String description, Boolean isComplete, Boolean isDel) {
         this.title = title;
         this.description = description;
+        this.isComplete = isComplete;
         this.isDel = isDel;
     }
 
-    public void update(String title, String description, Boolean isDel) {
+    public void update(String title, String description, Boolean isComplete, Boolean isDel) {
         this.title = title;
         this.description = description;
+        this.isComplete = isComplete;
         this.isDel = isDel;
     }
 }

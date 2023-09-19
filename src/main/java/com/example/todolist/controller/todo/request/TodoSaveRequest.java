@@ -1,5 +1,4 @@
-package com.example.todolist.controller.TodoListController.request;
-
+package com.example.todolist.controller.todo.request;
 
 import com.example.todolist.domain.TodoEntity;
 import lombok.Builder;
@@ -11,7 +10,8 @@ import lombok.NoArgsConstructor;
 public class TodoSaveRequest {
     private String title;
     private String description;
-    private final Boolean isDel = false;
+    private Boolean isComplete = false;
+    private Boolean isDel = false;
 
     @Builder
     public TodoSaveRequest(String title, String description) {
@@ -20,6 +20,6 @@ public class TodoSaveRequest {
     }
 
     public TodoEntity toEntity() {
-        return TodoEntity.builder().title(title).description(description).isDel(isDel).build();
+        return TodoEntity.builder().title(title).description(description).isComplete(isComplete).isDel(isDel).build();
     }
 }

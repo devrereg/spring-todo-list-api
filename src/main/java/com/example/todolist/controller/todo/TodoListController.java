@@ -1,15 +1,15 @@
-package com.example.todolist.controller.TodoListController;
+package com.example.todolist.controller.todo;
 
 import java.util.List;
 
-import com.example.todolist.controller.TodoListController.request.TodoSaveRequest;
-import com.example.todolist.controller.TodoListController.request.TodoUpdateRequest;
-import com.example.todolist.controller.TodoListController.response.TodoResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.todolist.common.dto.DataResponseDto;
+import com.example.todolist.controller.todo.request.TodoSaveRequest;
+import com.example.todolist.controller.todo.request.TodoUpdateRequest;
+import com.example.todolist.controller.todo.response.TodoResponse;
 import com.example.todolist.service.TodoService;
 
 

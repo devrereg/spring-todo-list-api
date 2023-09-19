@@ -11,5 +11,4 @@ import com.example.todolist.domain.TodoEntity;
 @Repository
 public interface TodoRepository extends JpaRepository<TodoEntity, Long> {
     List<TodoEntity> findAll();
-
 }

@@ -2,9 +2,9 @@ package com.example.todolist.service;
 
 import java.util.List;
 
-import com.example.todolist.controller.TodoListController.request.TodoSaveRequest;
-import com.example.todolist.controller.TodoListController.request.TodoUpdateRequest;
-import com.example.todolist.controller.TodoListController.response.TodoResponse;
+import com.example.todolist.controller.todo.request.TodoSaveRequest;
+import com.example.todolist.controller.todo.request.TodoUpdateRequest;
+import com.example.todolist.controller.todo.response.TodoResponse;
 import com.example.todolist.domain.TodoEntity;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +27,7 @@ public class TodoService {
     @Transactional
     public Long updateTodo(Long id, TodoUpdateRequest input) {
         TodoEntity todo = todoRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("해당 게시글이 없습니다. id="+id));
-        todo.update(input.getTitle(), input.getDescription(), input.getIsDel());
+        todo.update(input.getTitle(), input.getDescription(), input.getIsComplete() ,input.getIsDel());
 
         return id;
     }
