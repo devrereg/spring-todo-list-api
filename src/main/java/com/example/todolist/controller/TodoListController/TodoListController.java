@@ -2,20 +2,18 @@ package com.example.todolist.controller.TodoListController;
 
 import java.util.List;
 
+import com.example.todolist.controller.TodoListController.request.TodoSaveRequest;
+import com.example.todolist.controller.TodoListController.request.TodoUpdateRequest;
+import com.example.todolist.controller.TodoListController.response.TodoResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.todolist.common.dto.DataResponseDto;
-import com.example.todolist.controller.TodoListController.dto.TodoDto;
-import com.example.todolist.domain.TodoEntity;
-import com.example.todolist.repository.TodoRepository;
 import com.example.todolist.service.TodoService;
 
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api")
 class TodoListController {
@@ -24,10 +22,34 @@ class TodoListController {
     TodoService todoService;
 
 
-    @GetMapping("/todo-list")
-    public DataResponseDto<List<TodoDto.TodoSimple>> selectAll() {
-        List<TodoDto.TodoSimple> users = todoService.getAllTodo();
-        return DataResponseDto.of(users);
+    @PostMapping("/todos")
+    public Long saveTodo(@RequestBody TodoSaveRequest request) {
+        return todoService.saveTodo(request);
     }
+
+    @GetMapping("/todos")
+    public DataResponseDto<List<TodoResponse>> todoList() {
+        List<TodoResponse> todos = todoService.getAllTodo();
+        return DataResponseDto.of(todos);
+    }
+
+    @GetMapping("/todos/{todoId}")
+    public DataResponseDto<TodoResponse> todoDetail(@PathVariable Long todoId) {
+        TodoResponse todo = todoService.getTodo(todoId);
+        return DataResponseDto.of(todo);
+    }
+
+    @PutMapping("/todos/{todoId}")
+    public Long updateTodo(@PathVariable Long todoId, @RequestBody TodoUpdateRequest request) {
+        return todoService.updateTodo(todoId, request);
+    }
+
+
+   @DeleteMapping("/todos/{todoId}")
+   public Long deleteTodo(@PathVariable Long todoId) {
+       Long deletedId = todoService.deleteTodo(todoId);
+       return deletedId;
+   }
+
 
 }

@@ -6,13 +6,16 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(
     catalog = "todo-list-demo",    
-name = "todo")
+    name = "todo")
+@NoArgsConstructor
 @Getter
 @Setter
 public class TodoEntity {
@@ -28,4 +31,17 @@ public class TodoEntity {
 
     @Column(name = "is_del")
     private Boolean isDel = false;
+
+    @Builder
+    public TodoEntity(String title, String description, Boolean isDel) {
+        this.title = title;
+        this.description = description;
+        this.isDel = isDel;
+    }
+
+    public void update(String title, String description, Boolean isDel) {
+        this.title = title;
+        this.description = description;
+        this.isDel = isDel;
+    }
 }
